@@ -70,6 +70,89 @@
                         <img src="https://i.imgur.com/2lprU.gif" />
                     </section>
                 </section>
+		<section>
+			<section>
+				<h2>Distributed Simulation</h2>
+				<ul>
+					<li>Inleiding tot het probleem</li>
+					<li>Architectuur</li>
+					<li>Protocol</li>
+					<li>Slave beheer en Master lookup</li>
+					<li>Fouten tolerantie</li>
+					<li>Demo</li>
+				<ul>
+			</section>
+			<section>
+				<h2>Inleiding tot het probleem</h2>
+			</section>
+			<section>
+				<h2>Inleiding tot het probleem</h2>
+				<ul>
+					<li class="fragment">Verschillende afzonderlijke simulaties kunnen een koppling hebben</li>
+					<li class="fragment">1 simulatie runnen is een zwaar process. Meerdere niet aan te raden op 1 machine</li>
+					<li class="fragment">Simulaties laten runnen en enkel de output files zijn belangrijk</li>
+				</ul>
+				<h3 class="fragment">Oplossing</h3>
+				<p class="fragment">Severs terbeschikking stellen die het process beheren en uitvoeren</p>
+					
+			</section>
+			<section>
+				<h2>Architectuur</h2>
+			</section>
+			<section>
+				<h2>Architectuur</h2>
+				<h3>Algemeen</h3>
+				<img src="img/GeneralDistributed.png" />
+				<ul>
+					<li>Client en masters communiceren met elkaar</li>
+					<li>Master en slaves communiceren met elkaar</li>
+				<ul>
+			</section>
+			<section>
+				<h2>Architectuur</h2>
+				<h3>Slave</h3>
+				<img src="img/Slave.png" />
+				<ul>
+					<li>Slave krijgt berichten van de master</li>
+					<li>Slave zal de VLeaf2_Sim::Sim aansturen</li>
+					<li>Na enkel stap zal de ChemTransfer de gevraagde waarde doorsturen naar Master</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Architectuur</h2>
+				<h3>Master</h3>
+				<div>
+					<div style="float: left; width: 50%;">
+					<img src="img/GeneralDistributedMaster.png" />
+					</div>
+					<div style="float: left; width: 50%;">
+					<ul>
+						<li>Master is de instantie die de SlavePool, DistSimPool en ClientHandler aanmaakt, opstart en controleerd</li>
+						<li>Client handler zal alle Client requist afhandelen en alle beschibare clients bijhouden</li>
+						<li>SlavePool bevat al de Slaves die momenteel niet behoren tot een sessie</li>
+						<li>DistSimPool bevat al de lopende sessies</li>
+					</ul>
+					</div>
+				</div>
+			</section>
+			<section>
+				<h2>Architectuur</h2>
+				<h3>Master</h3>
+				<div>
+					<div style="float: left; width: 50%">
+					<img src="img/GeneralDistributedMaster.png" />
+					</div>
+					<div style="float: left; width: 50%">
+					<ul>
+						<li>DistSimControl bevat 1 enkele sessie en zal deze controleren</li>
+						<li>ReletadSlaves bevat al de Slaves die behoren tot deze sessie</li>
+						<li>Coupler is de instantie die de daadwerkelijke koppling op zich neemt</li>
+						<li>Observer zal er voor zorgen dat de output files worden opgeslagen</li>
+					</ul>
+					</div>
+				</div>
+			</section>
+		</section>
                 <!-- inter-slide links
 				<section>
 					<h2>Intergalactic Interconnections</h2>
