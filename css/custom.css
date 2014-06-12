@@ -1,0 +1,30 @@
+@import url(http://fonts.googleapis.com/css?family=Cuprum);
+
+.reveal section img {
+    border: none;
+}
+
+.no-shadow {
+    box-shadow: none !important;
+}
+
+.reveal table {
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.reveal table th, .reveal table td {
+    text-align: left;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    border-bottom: 1px solid;
+}
+
+.presentation-details {
+    font-family: 'Cuprum', sans-serif;
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    color: grey;
+    font-size: 0.8em;
+}
