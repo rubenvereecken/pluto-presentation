@@ -29,7 +29,11 @@
     font-size: 0.8em;
 }
 
-ul.arrows {
+img.custom {
+    float: right;
+}
+
+ul.custom {
     margin: 0;
     list-style-type: none !important;
     text-indent: -1em;
