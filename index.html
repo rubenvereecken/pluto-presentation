@@ -152,8 +152,139 @@
 					</div>
 				</div>
 			</section>
+			<section>
+				<h2>Protocol</h2>
+			</section>
+			<section>
+				<h2>Protocol</h2>
+				<ul>
+					<li>Protocol gebaseerd op bestaande protocol van Parex</li>
+					<li>TCP-socket tussen Master en Clients en tussen Master en Slaves</li>
+					<li>Structuur van een bericht is XML (gebruik van ptree)</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Protocol</h2>
+				<h3>Structuur</h3>
+				<code style="display: block; text-align: left; font-size: 30px;">
+					&lt;Control&gt;{Naam van de berichtstructuur}<br>
+					&nbsp;&nbsp;  &lt;ID&gt;{Session ID indien nodig}&lt;/ID&gt;<br>
+					&nbsp;&nbsp;  &lt;Data&gt;{Andere nodige data voor dit bericht}&lt;/Data&gt;<br>
+					&lt;/Control&gt;
+				</code>
+			</section>
+			<section>
+				<h2>Protocol</h2>
+				<h3>Structuur: Voorbeeld</h3>
+				<code style="display: block; text-align: left; font-size: 30px;">
+					&lt;Control&gt;Join<br>
+					&nbsp;&nbsp; &lt;ID&gt;1&lt;/ID&gt;<br>
+					&nbsp;&nbsp; &lt;Data&gt;100&lt;/Data&gt;<br>
+					&lt;/Control&gt;					
+				</code>
+			</section>
+			<section>
+				<h2>Slave beheer en Master lookup</h2>
+			</section>
+			<section>
+				<h2>Slave beheer en Master lookup</h2>
+				<h3>Slave beheer: Probleem</h3>
+				<ul>
+					<li>Als slaves crashen moeten deze manueel worden heropgestart</li>
+					<li>Bij manueel heropstarten moet IP adres en poort van master gekend zijn</li>
+					<li>Slaves kunnen maar verbinding maken als de Master zelf ook actief is</li>
+				<ul>
+			</section>
+			<section>
+				<h2>Slave beheer en Master lookup</h2>
+				<h3>Slave beheer: Oplossing</h3>
+				<ul>
+					<li class="fragment">Slaves worden beheerd door een slave_deamon</li>
+					<ul>
+						<li class="fragment">Opstarten van slaves als master die hiernaar vraagt</li>
+						<li class="fragment">Kijkt na of slaves gecrashed zijn</li>
+					</ul>
+					<li class="fragment">Master bevat lijst met mogelijke slave machines</li>
+					<ul>
+						<li class="fragment">Master zal elke 5 seconde UDP bericht sturen naar deze machines</li>
+						<li class="fragment">Als deamon merkt dat er minder slaves runnen dan master vraagt start hij er op</li>
+					</ul>
+				</ul>
+			</section>
+			<section>
+				<h2>Slave beheer en Master lookup</h2>
+				<h3>Master lookup: Probleem</h3>
+				<ul>
+					<li>Clients moeten IP adres en poort van master kennen</li>
+					<li>Als client een session wilt joinen ook het session ID</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Slave beheer en Master lookup</h2>
+				<h3>Master lookup: Oplossing</h3>
+				<ul>
+					<li class="fragment">Client kan UDP broadcast sturen met vraag naar masters</li>
+					<li class="fragment">Masters zullen antwoorden met UDP bericht en bevat:</li>
+					<ul>
+						<li class="fragment">Poort waarmee client verbinding moet maken</li>
+						<li class="fragment">Alle lopende sessies op die machine</li>
+					</ul>
+				</ul>
+			</section>
+			<section>
+				<h2>Fouten tolerantie</h2>
+			</section>
+			<section>
+				<h2>Fouten tolerantie</h2>
+				<h3>Mogelijke problemen</h3>
+				<ul>
+					<li class="fragment">Slave crashed</li>
+					<li class="fragment">Verbinding met slave verbroken</li>
+					<li class="fragment">Te weinig slaves beschikbaar</li>
+					<li class="fragment">Master crashed</li>
+			</section>
+			<section>
+				<h2>Fouten tolerantie</h2>
+				<h3>Slave crashed of verbinding met slave verbroken</h3>
+				<div>
+					<div style="float: left; width: 50%;">
+					<img src="img/FaultTolerance1.png">
+					</div>
+					<div style="float: left; width: 50%;">
+					<ul>
+						<li>DistSimControl beschikt over ReportSaver deze zal het laatste report bijhouden</li>
+						<li>DistSimControl beschikt ook over TransferInfo waarin staat welke slaves welke info moeten terug sturen</li>
+						<li>Als DistSimControl merkt dat slave gecrashed of niet berijkbaar is haalt hij andere uit SlavePool en initializeerd ALLE slaves opnieuw</li>
+					</ul>
+					</div>
+				</div>			
+			</section>
+			<section>
+				<h2>Fouten tolerantie</h2>
+				<h3>Wat als er geen slaves beschikbaar zijn?</h3>
+				<div>
+					<div style="float: left; width: 50%;">
+					<img src="img/FaultTolerance2.png">
+					</div>
+					<div style="float: left; width: 50%;">
+					<ul>
+						<li>Zelfde princiepe als vorige probleem</li>
+						<li>DistSimControl wordt in Queue gezet en BrokenParts worden aangeduid</li>
+						<li>Vanaf er genoeg Slaves vrijzijn om de eerste simulation in de queue te laten verderdoen wordt DistSimControl uit queue gehaald</li>
+						<li>Alle Slaves worden terug geherinitialiseerd</li>
+					</ul>
+					</div>
+				</div>
+			</section>
+			<section>
+				<h2>Fouten tolerantie</h2>
+				<h3>Wat als master crashed</h3>
+				<p class="fragment">Voorlopig nog geen oplossing voor</p>
+			</section>
+			<section>
+				<h2>Demo</h2>
+			</section>
 		</section>
-
         <section>
             <section>
                 <h2>Visualisation</h2>
