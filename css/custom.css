@@ -28,3 +28,13 @@
     color: grey;
     font-size: 0.8em;
 }
+
+ul.arrows {
+    margin: 0;
+    list-style-type: none !important;
+    text-indent: -1em;
+}
+
+ul.arrows li:before {
+    content: "↳ ";
+}
