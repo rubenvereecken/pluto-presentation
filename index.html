@@ -54,7 +54,7 @@
 					<h2>Overzicht</h2>
 					<ol>
                         <li>Inleiding</li>
-                        <li>Converter</li>
+                        <li>File Formaten</li>
                         <li>Post Processing</li>
                         <li>Visualisatie</li>
                         <li>Distributed Simulation</li>
@@ -70,6 +70,103 @@
                         <img src="https://i.imgur.com/2lprU.gif" />
                     </section>
                 </section>
+		<section>
+			<!--
+- belangrijke keuzes ivm realisatie
+- belangrijke keuzes ivm architectuur/design/implementatie
+- belangrijke struikelblokken en of uitzicht op makkelijke uitbreiding
+- Wat zijn de twee of drie belangrijkste inzichten die je uit het project meeneemt
+			-->
+			<section>
+				<h2>File Formaten</h2>
+				<ul>
+					<li>Inleiding</li>
+					<li>Conversie</li>
+					<li>Simulatie</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Inleiding</h2>				
+				<ul>
+					<li>PLY formaat</li>
+					<li>Breadth first doorlopen van ptree</li>
+				</ul>
+				<div><img src="img/PlyExample.png" /></div>
+				<!-- voorbeeld PLY file -->
+			</section>
+			<section>
+				<h2>Conversie</h2>
+				<ul>
+					<li>Design</li>
+					<div><img src="img/PlyFormat.png" /></div>
+					<li>analoog aan xml/xml.gz</li>
+					<ul>
+						<li>+ minder opzoekwerk code</li>
+						<li>+ makkelijk uitbreidingen doorvoeren</li>
+					</ul>
+					<li>CLI & GUI</li>
+			</section>
+			<section>
+				<h2>Simulatie</h2>
+				<ul>
+					<li>Design</li>
+					<div><img src="img/PlyExport.png" height="250"/></div>
+					<li>Analoog aan xml/xml.gz</li>
+					<li>Simulaties starten</li>
+					<li>Export</li>
+					<ul>
+						<li>Problemen met export naar ply</li>
+					</ul>
+				</ul>
+			</section>
+		</section>
+		<section>
+			<section>
+				<h2>Post Processing</h2>
+				<ul>
+					<li>Inleiding</li>
+					<li>Formaat</li>
+					<li>Gui</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Inleiding</h2>
+				<!-- Gui img -->
+			</section>
+			<section>
+				<h2>Formaat</h2>
+				<ul>
+					<li>Design </li>
+					<!-- Design img -->
+				</il>
+			</section>
+			<section>
+				<h2> Formaat </h2>
+				<ul>
+					<li> 2 vormen </li>
+					<ul>
+						<li> TYPE &nbsp;&nbsp;&nbsp; ATTRIBUTE</li>
+						<ul>
+							<li>Aanpasbaar</li>
+							<li>Overzichtelijk</li>
+						</ul>
+						<li> STEP &nbsp;&nbsp;&nbsp; TYPE &nbsp;&nbsp;&nbsp; ATTRIBUTE &nbsp;&nbsp;&nbsp; ID &nbsp;&nbsp;&nbsp; VALUE </li>
+						<ul>
+							<li> Attributes volgen doorheen simulatie </li>
+							<li> Makkelijk visualiseren </li>
+						</ul>
+					</ul>
+			</section>
+			<section>
+				<h2>GUI</h2>
+				<ul>
+					<li> Load Vleaf file(s) </li>
+					<li> Selection Widget </li>
+					<li> Import/Export Selection </li>
+					<li> Save </li>
+				</ul>
+			</section>
+		</section>
 		<section>
 			<section>
 				<h2>Distributed Simulation</h2>
