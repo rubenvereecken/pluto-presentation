@@ -457,6 +457,73 @@
                 <img src="img/rotation2.gif" />
             </section>
         </section>
+        <section>
+        	<section>
+        		<h2>Dynamic Attributes</h2>
+        		<ul>
+        			<li>Inleiding</li>
+        			<li>Moeilijkheden en Keuzes</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Inleiding</h2>
+        		<ul>
+        			<li>huidig: chemische attributen in Mesh structuur</li>
+        			<li>uiteindelijk doel: 	<ul>
+        										<li>Mesh en "Tissue" scheiden in code</li>
+        										<li>Dynamisch Chemische attributen toevoegen/verwijderen/aanpassen</li>
+        										<li>Model inlezen uit xml</li>
+        									</ul> 
+        			</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Moeilijkheden en keuzes</h2>
+        			<ul>
+        				<li>Aparte "container" dynamic_attributes</li>
+        				<li>Integratie dynamic_attributes in code</li>
+        				<li>Formaat model</li>
+        			</ul>
+        	</section>
+        	<section>
+        		<h2>Moeilijkheden en keuzes</h2>
+        		<h4>"container" dynamic_attributes</h4>
+        		<img src="img/DynamicAttributes.png" /><br />
+        		ook methodes voor Node en Wall + methodes die een volledig model (voor cell, node en wall inlezen)
+        	</section>
+        	<section>
+        		<h2>Moeilijkheden en keuzes</h2>
+        		<h4>Integratie dynamic_attributes in code</h4>
+        		<ul>
+        			<li>Mesh bevat Dynamic_Attributes object</li>
+        			<li>De klassen Cell-/Node-/WallAttributes krijgen pointer naar object (via constructor)</li>
+        			<li>bestaande methodes door methodes uit dynamic_attributes</li>
+        			<li>assignment operators toegevoegd</li>
+        			<li>MeshBuilders aangepast zodat ze attributen ook kopiëren</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Moeilijkheden en keuzes</h2>
+        		<h4>Formaat Model</h4>
+        		<pre>
+					&lt;cell_attributes_array&gt;
+					    &lt;attribute&gt;
+					        &lt; name&gt;
+					            attributeName
+					        &lt;/name&gt;
+					        &lt; type &gt;
+					            int
+					        &lt;/type&gt;
+					        &lt; default &gt;
+					            7
+					        &lt;/default&gt;
+					    &lt;/attribute&gt;
+					&lt;/cell_attributes_array&gt;
+        		</pre>
+        		Also for Node and wall. Supported attributes are int, string, double.
+        	</section>
+        	
+        </section>
                 <!-- inter-slide links
 				<section>
 					<h2>Intergalactic Interconnections</h2>
