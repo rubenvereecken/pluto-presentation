@@ -45,7 +45,7 @@
 			<div class="slides">
 				<section>
 					<h1>Bachelor Eindwerk</h1>
-                    <h3>Groep Pluto</h3>
+                   			<h3>Groep Pluto</h3>
 					<p>
 						<small>Door Ruben Mennes, Ruben Vereecken, Eveline Ververs & Thomas Pinna</small>
 					</p>
@@ -53,23 +53,15 @@
 				<section id="Overzicht">
 					<h2>Overzicht</h2>
 					<ol>
-                        <li>Inleiding</li>
                         <li>File Formaten</li>
                         <li>Post Processing</li>
+						<li>Dynamic attributes</li>
                         <li>Visualisatie</li>
+						<li>Datastructuur</li>
                         <li>Distributed Simulation</li>
                         <li>Slot</li>
 					</ol>
-				</section>
-                <section>
-                    <section>
-                        <h2>Inleiding</h2>
-                        (ga naar beneden!)
-                    </section>
-                    <section>
-                        <img src="https://i.imgur.com/2lprU.gif" />
-                    </section>
-                </section>
+		</section>
 		<section>
 			<!--
 - belangrijke keuzes ivm realisatie
@@ -172,6 +164,184 @@
 				</div>
 			</section>
 		</section>
+	        <section>
+        	<section>
+        		<h2>Dynamic Attributes</h2>
+        		<ul>
+        			<li>Inleiding</li>
+        			<li>Moeilijkheden en Keuzes</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Inleiding</h2>
+        		<ul>
+        			<li>huidig: chemische attributen in Mesh structuur</li>
+        			<li>uiteindelijk doel: 	<ul>
+        										<li>Mesh en "Tissue" scheiden in code</li>
+        										<li>Dynamisch Chemische attributen toevoegen/verwijderen/aanpassen</li>
+        										<li>Model inlezen uit xml</li>
+        									</ul> 
+        			</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Moeilijkheden en keuzes</h2>
+        			<ul>
+        				<li>Aparte "container" dynamic_attributes</li>
+        				<li>Integratie dynamic_attributes in code</li>
+        				<li>Formaat model</li>
+        			</ul>
+        	</section>
+        	<section>
+        		<h2>Moeilijkheden en keuzes</h2>
+        		<h4>"container" dynamic_attributes</h4>
+        		<img src="img/DynamicAttributes.png" /><br />
+        		ook methodes voor Node en Wall + methodes die een volledig model (voor cell, node en wall inlezen)
+        	</section>
+        	<section>
+        		<h2>Moeilijkheden en keuzes</h2>
+        		<h4>Integratie dynamic_attributes in code</h4>
+        		<ul>
+        			<li>Mesh bevat Dynamic_Attributes object</li>
+        			<li>De klassen Cell-/Node-/WallAttributes krijgen pointer naar object (via constructor)</li>
+        			<li>bestaande methodes door methodes uit dynamic_attributes</li>
+        			<li>assignment operators toegevoegd</li>
+        			<li>MeshBuilders aangepast zodat ze attributen ook kopiëren</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Moeilijkheden en keuzes</h2>
+        		<h4>Formaat Model</h4>
+        		<pre>
+					&lt;cell_attributes_array&gt;
+					    &lt;attribute&gt;
+					        &lt; name&gt;
+					            attributeName
+					        &lt;/name&gt;
+					        &lt; type &gt;
+					            int
+					        &lt;/type&gt;
+					        &lt; default &gt;
+					            7
+					        &lt;/default&gt;
+					    &lt;/attribute&gt;
+					&lt;/cell_attributes_array&gt;
+        		</pre>
+        		Also for Node and wall. Supported attributes are int, string, double.
+        	</section>
+        </section>
+<section>
+            <section>
+                <h2>Visualisation</h2>
+                <ul>
+                    <li>Inleiding</li>
+                    <li>Moeilijkheden & Keuzes</li>
+                    <li>Architectuur</li>
+                    <li>Resultaat en vergelijking</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Inleiding</h2>
+                <ul>
+                    <li>Huidige viewer in Qt geïmplementeerd</li>
+                    <li>Vraag naar OpenGL viewer</li>
+                    <li>Richting 3D (in de toekomst)</li>
+                    <li>Viewer met reliëf</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Moeilijkheden & Keuzes</h2>
+                <ul>
+                    <li>OpenGL Compatibiliteit</li>
+                    <ul class="custom arrows">
+                        <li>GL 3.1 + Compatibility Profile</li>
+                    </ul>
+                    <li>Gebruik van shaders? Uiteindelijk niet.</li>
+                    <li>Correcte weergave van schaduw</li>
+                </ul>
+                <aside class="notes">
+                    <p>OpenGL 3.1 uitgekomen in 2009</p>
+                </aside>
+            </section>
+            <section>
+                <h2>Architectuur</h2>
+                <img class="custom" src="img/visualisation_arch.png" />
+                <ul>
+                    <li>Alle implementatie in GLDrawer</li>
+                    <ul class="custom arrows">
+                        <li>Zeer low level</li>
+                        <li>Performantiewinst</li>
+                    </ul>
+                </ul>
+            </section>
+            <section>
+                <h2>Vergelijking</h2>
+                <img src="img/comparison_qt.png" />
+                <img src="img/comparison_gl.png" style="padding-left:50px;"/>
+            </section>
+            <section>
+                <h2>Resultaat</h2>
+                <img src="img/simulation.gif" />
+            </section>
+            <section>
+                <h2>Feature: Rotatie</h2>
+                <img src="img/rotation2.gif" />
+            </section>
+        </section>
+		<section>
+        	<section>
+        		<h2>DataStructuur</h2>
+        		<ul>
+        			<li>Inleiding</li>
+        			<li>Implementatie</li>
+        			<li>performancewinst</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Inleiding</h2>
+        		<ul>
+        			<li>huidige situeatie
+        				<ul>
+        					<li>cells, nodes en walls gealloceerd op stack</li>
+        					<li>vaak ver uiteen</li>
+        					<li>veel cachemisses!</li>
+        					<li>gebruik van vector&lt;shared_pointer&lt;Cell&gt;&gt; voor lifetime management</li>
+        				</ul>
+        			</li>
+        			<li>doel:
+        				<ul>
+        					<li>performancewinst bereiken door cachemisses minimaliseren</li>
+        					<li>betere liftetimemanagement</li>
+        				</ul>
+        			</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Implementatie</h2>
+        		We maken gebruik van een geoptimaliseerde datastructuur, die memory managet:
+        		<ul>
+        			<li>intern een vector&lt;array&lt;T&gt;&gt;</li>
+        			<li>T is een cell/node of wall in dit project</li>
+        			<li>gevolg:
+        				<ul>
+        					<li>geheugen in blokken gealloceerd</li>
+        					<li>cells, nodes en walls dichter bij mekaar in code</li>
+        					<li>high locality of data =&gt; minder cachemisses</li>
+        				</ul>
+        			</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>resultaat</h2>
+        		<ul>
+        			<li>globaal gezien 16.41% performancewinst</li>
+        			<li>TipGrowth: 2% (kortste test in tijd)</li>
+        			<li>Demo1: 22.96% winst (langste in tijd)</li>
+        			<li>Demo2: tot 30.73% winst</li>
+        		</ul>
+        	</section>
+        </section>
+	
 		<section>
 			<section>
 				<h2>Distributed Simulation</h2>
@@ -404,183 +574,8 @@
 				<h2>Demo</h2>
 			</section>
 		</section>
-        <section>
-            <section>
-                <h2>Visualisation</h2>
-                <ul>
-                    <li>Inleiding</li>
-                    <li>Moeilijkheden & Keuzes</li>
-                    <li>Architectuur</li>
-                    <li>Resultaat en vergelijking</li>
-                </ul>
-            </section>
-            <section>
-                <h2>Inleiding</h2>
-                <ul>
-                    <li>Huidige viewer in Qt geïmplementeerd</li>
-                    <li>Vraag naar OpenGL viewer</li>
-                    <li>Richting 3D (in de toekomst)</li>
-                    <li>Viewer met reliëf</li>
-                </ul>
-            </section>
-            <section>
-                <h2>Moeilijkheden & Keuzes</h2>
-                <ul>
-                    <li>OpenGL Compatibiliteit</li>
-                    <ul class="custom arrows">
-                        <li>GL 3.1 + Compatibility Profile</li>
-                    </ul>
-                    <li>Gebruik van shaders? Uiteindelijk niet.</li>
-                    <li>Correcte weergave van schaduw</li>
-                </ul>
-                <aside class="notes">
-                    <p>OpenGL 3.1 uitgekomen in 2009</p>
-                </aside>
-            </section>
-            <section>
-                <h2>Architectuur</h2>
-                <img class="custom" src="img/visualisation_arch.png" />
-                <ul>
-                    <li>Alle implementatie in GLDrawer</li>
-                    <ul class="custom arrows">
-                        <li>Zeer low level</li>
-                        <li>Performantiewinst</li>
-                    </ul>
-                </ul>
-            </section>
-            <section>
-                <h2>Vergelijking</h2>
-                <img src="img/comparison_qt.png" />
-                <img src="img/comparison_gl.png" style="padding-left:50px;"/>
-            </section>
-            <section>
-                <h2>Resultaat</h2>
-                <img src="img/simulation.gif" />
-            </section>
-            <section>
-                <h2>Feature: Rotatie</h2>
-                <img src="img/rotation2.gif" />
-            </section>
-        </section>
-        <section>
-        	<section>
-        		<h2>Dynamic Attributes</h2>
-        		<ul>
-        			<li>Inleiding</li>
-        			<li>Moeilijkheden en Keuzes</li>
-        		</ul>
-        	</section>
-        	<section>
-        		<h2>Inleiding</h2>
-        		<ul>
-        			<li>huidig: chemische attributen in Mesh structuur</li>
-        			<li>uiteindelijk doel: 	<ul>
-        										<li>Mesh en "Tissue" scheiden in code</li>
-        										<li>Dynamisch Chemische attributen toevoegen/verwijderen/aanpassen</li>
-        										<li>Model inlezen uit xml</li>
-        									</ul> 
-        			</li>
-        		</ul>
-        	</section>
-        	<section>
-        		<h2>Moeilijkheden en keuzes</h2>
-        			<ul>
-        				<li>Aparte "container" dynamic_attributes</li>
-        				<li>Integratie dynamic_attributes in code</li>
-        				<li>Formaat model</li>
-        			</ul>
-        	</section>
-        	<section>
-        		<h2>Moeilijkheden en keuzes</h2>
-        		<h4>"container" dynamic_attributes</h4>
-        		<img src="img/DynamicAttributes.png" /><br />
-        		ook methodes voor Node en Wall + methodes die een volledig model (voor cell, node en wall inlezen)
-        	</section>
-        	<section>
-        		<h2>Moeilijkheden en keuzes</h2>
-        		<h4>Integratie dynamic_attributes in code</h4>
-        		<ul>
-        			<li>Mesh bevat Dynamic_Attributes object</li>
-        			<li>De klassen Cell-/Node-/WallAttributes krijgen pointer naar object (via constructor)</li>
-        			<li>bestaande methodes door methodes uit dynamic_attributes</li>
-        			<li>assignment operators toegevoegd</li>
-        			<li>MeshBuilders aangepast zodat ze attributen ook kopiëren</li>
-        		</ul>
-        	</section>
-        	<section>
-        		<h2>Moeilijkheden en keuzes</h2>
-        		<h4>Formaat Model</h4>
-        		<pre>
-					&lt;cell_attributes_array&gt;
-					    &lt;attribute&gt;
-					        &lt; name&gt;
-					            attributeName
-					        &lt;/name&gt;
-					        &lt; type &gt;
-					            int
-					        &lt;/type&gt;
-					        &lt; default &gt;
-					            7
-					        &lt;/default&gt;
-					    &lt;/attribute&gt;
-					&lt;/cell_attributes_array&gt;
-        		</pre>
-        		Also for Node and wall. Supported attributes are int, string, double.
-        	</section>
-        </section>
-        <section>
-        	<section>
-        		<h2>DataStructuur</h2>
-        		<ul>
-        			<li>Inleiding</li>
-        			<li>Implementatie</li>
-        			<li>performancewinst</li>
-        		</ul>
-        	</section>
-        	<section>
-        		<h2>Inleiding</h2>
-        		<ul>
-        			<li>huidige situeatie
-        				<ul>
-        					<li>cells, nodes en walls gealloceerd op stack</li>
-        					<li>vaak ver uiteen</li>
-        					<li>veel cachemisses!</li>
-        					<li>gebruik van vector&lt;shared_pointer&lt;Cell&gt;&gt; voor lifetime management</li>
-        				</ul>
-        			</li>
-        			<li>doel:
-        				<ul>
-        					<li>performancewinst bereiken door cachemisses minimaliseren</li>
-        					<li>betere liftetimemanagement</li>
-        				</ul>
-        			</li>
-        		</ul>
-        	</section>
-        	<section>
-        		<h2>Implementatie</h2>
-        		We maken gebruik van een geoptimaliseerde datastructuur, die memory managet:
-        		<ul>
-        			<li>intern een vector&lt;array&lt;T&gt;&gt;</li>
-        			<li>T is een cell/node of wall in dit project</li>
-        			<li>gevolg:
-        				<ul>
-        					<li>geheugen in blokken gealloceerd</li>
-        					<li>cells, nodes en walls dichter bij mekaar in code</li>
-        					<li>high locality of data =&gt; minder cachemisses</li>
-        				</ul>
-        			</li>
-        		</ul>
-        	</section>
-        	<section>
-        		<h2>resultaat</h2>
-        		<ul>
-        			<li>globaal gezien 16.41% performancewinst</li>
-        			<li>TipGrowth: 2% (kortste test in tijd)</li>
-        			<li>Demo1:22.96% winst (langste in tijd)</li>
-        			<li></li>
-        		</ul>
-        	</section>
-        </section>
+        
+
                 <!-- inter-slide links
 				<section>
 					<h2>Intergalactic Interconnections</h2>
