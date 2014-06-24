@@ -527,7 +527,59 @@
         		</pre>
         		Also for Node and wall. Supported attributes are int, string, double.
         	</section>
-        	
+        </section>
+        <section>
+        	<section>
+        		<h2>DataStructuur</h2>
+        		<ul>
+        			<li>Inleiding</li>
+        			<li>Implementatie</li>
+        			<li>performancewinst</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Inleiding</h2>
+        		<ul>
+        			<li>huidige situeatie
+        				<ul>
+        					<li>cells, nodes en walls gealloceerd op stack</li>
+        					<li>vaak ver uiteen</li>
+        					<li>veel cachemisses!</li>
+        					<li>gebruik van vector&lt;shared_pointer&lt;Cell&gt;&gt; voor lifetime management</li>
+        				</ul>
+        			</li>
+        			<li>doel:
+        				<ul>
+        					<li>performancewinst bereiken door cachemisses minimaliseren</li>
+        					<li>betere liftetimemanagement</li>
+        				</ul>
+        			</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Implementatie</h2>
+        		We maken gebruik van een geoptimaliseerde datastructuur, die memory managet:
+        		<ul>
+        			<li>intern een vector&lt;array&lt;T&gt;&gt;</li>
+        			<li>T is een cell/node of wall in dit project</li>
+        			<li>gevolg:
+        				<ul>
+        					<li>geheugen in blokken gealloceerd</li>
+        					<li>cells, nodes en walls dichter bij mekaar in code</li>
+        					<li>high locality of data =&gt; minder cachemisses</li>
+        				</ul>
+        			</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>resultaat</h2>
+        		<ul>
+        			<li>globaal gezien 16.41% performancewinst</li>
+        			<li>TipGrowth: 2% (kortste test in tijd)</li>
+        			<li>Demo1:22.96% winst (langste in tijd)</li>
+        			<li></li>
+        		</ul>
+        	</section>
         </section>
                 <!-- inter-slide links
 				<section>
