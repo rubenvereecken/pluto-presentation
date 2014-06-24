@@ -42,3 +42,12 @@ ul.custom {
 ul.arrows li:before {
     content: "↳ ";
 }
+
+.plusli{
+    text-indent: -1em;
+}
+
+.plusli:before{
+    content: "+";
+    padding-right: 5px;
+}

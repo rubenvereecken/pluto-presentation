@@ -90,10 +90,10 @@
 				<ul>
 					<li>Design</li>
 					<div><img src="img/PlyFormat.png" /></div>
-					<li>analoog aan xml/xml.gz</li>
+					<li>Analoog aan xml/xml.gz</li>
 					<ul>
-						<li>+ minder opzoekwerk code</li>
-						<li>+ makkelijk uitbreidingen doorvoeren</li>
+						<li>Minder opzoekwerk code</li>
+						<li>Makkelijk uitbreidingen doorvoeren</li>
 					</ul>
 					<li>CLI & GUI</li>
                 </ul>
@@ -111,13 +111,28 @@
 					</ul>
 				</ul>
 			</section>
+			<section>
+				<h2>Simulatie</h2>
+				<h3>Export probleem</h3>
+				<pre>
+<span style='color:#800000; font-weight:bold; '>template</span> <span style='color:#800080; '>&lt;</span><span style='color:#800080; '>></span>
+<span style='color:#800000; font-weight:bold; '>template</span> <span style='color:#800080; '>&lt;</span><span style='color:#800080; '>></span>
+<span style='color:#800000; font-weight:bold; '>void</span> ExportViewer<span style='color:#800080; '>&lt;</span>PlyGzExporter<span style='color:#800080; '>></span><span style='color:#800080; '>::</span>Update<span style='color:#800080; '>&lt;</span>SimEvent<span style='color:#800080; '>></span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>const</span> SimEvent<span style='color:#808030; '>&amp;</span> e<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+</pre>
+<br>
+<pre>
+<span style='color:#800000; font-weight:bold; '>template</span> <span style='color:#800080; '>&lt;</span><span style='color:#800080; '>></span>
+<span style='color:#800000; font-weight:bold; '>template</span> <span style='color:#800080; '>&lt;</span><span style='color:#800000; font-weight:bold; '>typename</span> EventType<span style='color:#800080; '>></span>
+<span style='color:#800000; font-weight:bold; '>void</span> ExportViewer<span style='color:#800080; '>&lt;</span>PlyGzExporter<span style='color:#800080; '>></span><span style='color:#800080; '>::</span>Update<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>const</span> EventType<span style='color:#808030; '>&amp;</span> e<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+</pre>
+			</section>
 		</section>
 		<section>
 			<section>
 				<h2>Post Processing</h2>
 				<ul>
 					<li>Inleiding</li>
-					<li>tsv Formaat</li>
+					<li>TSV Formaat</li>
 					<li>Gui</li>
 				</ul>
 			</section>
@@ -135,7 +150,7 @@
 			<section>
 				<h2>tsv Formaat </h2>
 				<ul>
-					<li> 2 vormen </li>
+					<li> 2 formaten </li>
 					<ul>
 						<li> TYPE &nbsp;&nbsp;&nbsp; ATTRIBUTE</li>
 						<ul>
@@ -177,64 +192,71 @@
         	<section>
         		<h2>Inleiding</h2>
         		<ul>
-        			<li>huidig: chemische attributen in Mesh structuur</li>
-        			<li>uiteindelijk doel: 	<ul>
+        			<li>Huidig: chemische attributen in Mesh structuur</li>
+        			<li>Uiteindelijk doel: 	<ul>
         										<li>Mesh en "Tissue" scheiden in code</li>
-        										<li>Dynamisch Chemische attributen toevoegen/verwijderen/aanpassen</li>
-        										<li>Model inlezen uit xml</li>
+        										<li>Dynamisch chemische attributen toevoegen/verwijderen/aanpassen</li>
+        										<li>Model inlezen uit Vleaf file</li>
         									</ul> 
         			</li>
         		</ul>
         	</section>
         	<section>
         		<h2>Moeilijkheden en keuzes</h2>
-        			<ul>
-        				<li>Aparte "container" dynamic_attributes</li>
-        				<li>Integratie dynamic_attributes in code</li>
-        				<li>Formaat model</li>
-        			</ul>
+        		<h3>"container" dynamic_attributes</h3>
+				<div>
+					<div style="float:left; width:50%;">
+						<img src="img/DynamicAttributes.png" />
+					</div>
+					<div style="float:left; width:50%;">
+						<ul style="list-style: none; margin-top:30px;">
+							<li class="plusli">Methodes voor Node en Wall</li>
+							<li class="plusli">Methodes die een volledig model inlezen/wegschrijven</li>
+						</ul>
+					</div>
+				</div>
         	</section>
         	<section>
         		<h2>Moeilijkheden en keuzes</h2>
-        		<h4>"container" dynamic_attributes</h4>
-        		<img src="img/DynamicAttributes.png" /><br />
-        		ook methodes voor Node en Wall + methodes die een volledig model (voor cell, node en wall inlezen)
-        	</section>
-        	<section>
-        		<h2>Moeilijkheden en keuzes</h2>
-        		<h4>Integratie dynamic_attributes in code</h4>
+        		<h3>Integratie dynamic_attributes in code</h3>
         		<ul>
-        			<li>Mesh bevat Dynamic_Attributes object</li>
+        			<li>Mesh bevat dynamic_attributes object</li>
         			<li>De klassen Cell-/Node-/WallAttributes krijgen pointer naar object (via constructor)</li>
-        			<li>bestaande methodes door methodes uit dynamic_attributes</li>
-        			<li>assignment operators toegevoegd</li>
+        			<li>Bestaande methodes door methodes uit dynamic_attributes</li>
+        			<li>Assignment operators toegevoegd</li>
         			<li>MeshBuilders aangepast zodat ze attributen ook kopiëren</li>
         		</ul>
         	</section>
         	<section>
         		<h2>Moeilijkheden en keuzes</h2>
-        		<h4>Formaat Model</h4>
-        		<pre>
-					&lt;cell_attributes_array&gt;
-					    &lt;attribute&gt;
-					        &lt; name&gt;
-					            attributeName
-					        &lt;/name&gt;
-					        &lt; type &gt;
-					            int
-					        &lt;/type&gt;
-					        &lt; default &gt;
-					            7
-					        &lt;/default&gt;
-					    &lt;/attribute&gt;
-					&lt;/cell_attributes_array&gt;
-        		</pre>
-        		Also for Node and wall. Supported attributes are int, string, double.
+        		<h3>Formaat Model</h3>
+        		<pre style="width:60%;">
+&lt;cell_attributes_array&gt;
+    &lt;attribute&gt;
+		&lt; name&gt;
+            attributeName
+		&lt;/name&gt;
+		&lt; type &gt;
+		    int
+		&lt;/type&gt;
+		&lt; default &gt;
+		    7
+		&lt;/default&gt;
+    &lt;/attribute&gt;
+&lt;/cell_attributes_array&gt;</pre>
         	</section>
+			<section>
+				<h2>Suggesties</h2>
+				<ul>
+					<li>Meer types toevoegen (bvb vectoren)</li>
+					<li>Dynamic_attributes niet meer in Mesh bewaren</li>
+					<li>Integratie in user interface</li>
+				</ul>
+			</section>
         </section>
 <section>
             <section>
-                <h2>Visualisation</h2>
+                <h2>Visualisatie</h2>
                 <ul>
                     <li>Inleiding</li>
                     <li>Moeilijkheden & Keuzes</li>
@@ -302,62 +324,61 @@
         	<section>
         		<h2>Inleiding</h2>
         		<ul>
-        			<li>huidige situeatie
+        			<li>Huidige situatie
         				<ul>
-        					<li>cells, nodes en walls gealloceerd op stack</li>
-        					<li>vaak ver uiteen</li>
-        					<li>veel cachemisses!</li>
-        					<li>gebruik van vector&lt;shared_pointer&lt;Cell&gt;&gt; voor lifetime management</li>
+        					<li>Cells, Nodes en Walls gealloceerd op stack</li>
+        					<li>Willekeurig in geheugen</li>
+        					<li>Veel cachemisses!</li>
+        					<li>Gebruik van vector&lt;shared_pointer&lt;Cell&gt;&gt; voor lifetime management</li>
         				</ul>
         			</li>
-        			<li>doel:
+        			<li>Doel:
         				<ul>
-        					<li>performancewinst bereiken door cachemisses minimaliseren</li>
-        					<li>betere liftetimemanagement</li>
+        					<li>Performantiewinst</li>
+        					<li>Beter lifetimemanagement</li>
         				</ul>
         			</li>
         		</ul>
         	</section>
         	<section>
         		<h2>Implementatie</h2>
-        		We maken gebruik van een geoptimaliseerde datastructuur, die memory managet:
+				<ul>
+        		<li>Gebruik van geoptimaliseerde datastructuur</li>
         		<ul>
-        			<li>intern een vector&lt;array&lt;T&gt;&gt;</li>
-        			<li>T is een cell/node of wall in dit project</li>
-        			<li>gevolg:
+        			<li>Intern een vector&lt;array&lt;T&gt;*&gt;</li>
+        			<li>Waarbij T een Cell, Node of Wall</li>
+        			<li>Gevolg:
         				<ul>
-        					<li>geheugen in blokken gealloceerd</li>
-        					<li>cells, nodes en walls dichter bij mekaar in code</li>
-        					<li>high locality of data =&gt; minder cachemisses</li>
+        					<li>Geheugen in blokken gealloceerd</li>
+        					<li>Cells, Nodes en Walls dichter bij elkaar</li>
+        					<li>High locality of data =&gt; minder cachemisses</li>
         				</ul>
         			</li>
         		</ul>
+				</ul>
         	</section>
         	<section>
-        		<h2>resultaat</h2>
-        		<ul>
-        			<li>globaal gezien 16.41% performancewinst</li>
-        			<li>TipGrowth: 2% (kortste test in tijd)</li>
-        			<li>Demo1: 22.96% winst (langste in tijd)</li>
-        			<li>Demo2: tot 30.73% winst</li>
-        		</ul>
+        		<h2>Performancewinst</h2>
+        		<table style="font-size:28px; padding-bottom:1em;">
+					<tr><th></th><th>Gem. zonder</th><th>Afwijking zonder</th><th>Gen. met</th><th>Afwijking met<th>Winst</th></tr>
+					<tr><th>Demo 1</th><td>648.654ms</td><td>805ms</td><td>499.752ms</td><td>707ms</td><td>22,96%</td></tr>
+					<tr><th>TipGrowth</th><td>8.263ms</td><td>91ms</td><td>8.037ms</td><td>89ms</td><td>2,74%</td></tr>
+					<tr><th>Globaal</th><td>3.749.877ms</td><td>1.936ms</td><td>3.134.383ms</td><td>1.770ms</td><td>16,41%</td></tr>
+				</table>
+				<p style="font-size:20px;padding-top:1em">Soms tot 30% winst</p>
         	</section>
         </section>
 	
 		<section>
 			<section>
-				<h2>Distributed Simulation</h2>
+				<h2>Gedistribueerde simulatie</h2>
 				<ul>
 					<li>Inleiding tot het probleem</li>
 					<li>Architectuur</li>
 					<li>Protocol</li>
 					<li>Slave beheer en Master lookup</li>
 					<li>Fouten tolerantie</li>
-					<li>Demo</li>
 				</ul>
-			</section>
-			<section>
-				<h2>Inleiding tot het probleem</h2>
 			</section>
 			<section>
 				<h2>Inleiding tot het probleem</h2>
@@ -367,11 +388,8 @@
 					<li class="fragment">Simulaties laten runnen en enkel de output files zijn belangrijk</li>
 				</ul>
 				<h3 class="fragment">Oplossing</h3>
-				<p class="fragment">Severs terbeschikking stellen die het process beheren en uitvoeren</p>
+				<p class="fragment">Severs ter beschikking stellen, die het process beheren en uitvoeren</p>
 					
-			</section>
-			<section>
-				<h2>Architectuur</h2>
 			</section>
 			<section>
 				<h2>Architectuur</h2>
@@ -389,23 +407,23 @@
 				<ul>
 					<li>Slave krijgt berichten van de master</li>
 					<li>Slave zal de VLeaf2_Sim::Sim aansturen</li>
-					<li>Na enkel stap zal de ChemTransfer de gevraagde waarde doorsturen naar Master</li>
+					<li>Na elke stap zal de ChemTransfer de gevraagde waarde doorsturen naar Master</li>
 				</ul>
 			</section>
 			<section>
 				<h2>Architectuur</h2>
 				<h3>Master</h3>
 				<div>
-					<div style="float: left; width: 50%;">
-					<img src="img/GeneralDistributedMaster.png" />
-					</div>
-					<div style="float: left; width: 50%;">
+					<div style="float: left; width: 55%;">
 					<ul>
-						<li>Master is de instantie die de SlavePool, DistSimPool en ClientHandler aanmaakt, opstart en controleerd</li>
-						<li>Client handler zal alle Client requist afhandelen en alle beschibare clients bijhouden</li>
+						<li>Master is de instantie die de SlavePool, DistSimPool en ClientHandler aanmaakt, opstart en controleert</li>
+						<li>ClientHandler zal alle Client requist afhandelen en alle beschibare clients bijhouden</li>
 						<li>SlavePool bevat al de Slaves die momenteel niet behoren tot een sessie</li>
 						<li>DistSimPool bevat al de lopende sessies</li>
 					</ul>
+					</div>
+					<div style="float: left; width: 45%;">
+					<img src="img/GeneralDistributedMaster.png" />
 					</div>
 				</div>
 			</section>
@@ -413,10 +431,7 @@
 				<h2>Architectuur</h2>
 				<h3>Master</h3>
 				<div>
-					<div style="float: left; width: 50%">
-					<img src="img/GeneralDistributedMaster.png" />
-					</div>
-					<div style="float: left; width: 50%">
+					<div style="float: left; width: 55%">
 					<ul>
 						<li>DistSimControl bevat 1 enkele sessie en zal deze controleren</li>
 						<li>ReletadSlaves bevat al de Slaves die behoren tot deze sessie</li>
@@ -424,15 +439,30 @@
 						<li>Observer zal er voor zorgen dat de output files worden opgeslagen</li>
 					</ul>
 					</div>
+					<div style="float: left; width: 45%">
+					<img src="img/GeneralDistributedMaster.png" />
+					</div>
 				</div>
 			</section>
 			<section>
-				<h2>Protocol</h2>
+				<h2>Architectuur</h2>
+				<h3>Opmerking</h3>
+				<ul>
+					<li>Master bevat enkel noodzakelijke Cellattributen</li>
+					<li>Voordelen</li>
+					<ul>
+						<li>Consistentie</li>
+						<li>Geheugen</li>
+					</ul>
+					<li>Nadelen</li>
+					<ul>
+						<li>Onderhoudbaarheid</li>
+					</ul>
 			</section>
 			<section>
 				<h2>Protocol</h2>
 				<ul>
-					<li>Protocol gebaseerd op bestaande protocol van Parex</li>
+					<li>Gebaseerd op bestaande protocol van Parex</li>
 					<li>TCP-socket tussen Master en Clients en tussen Master en Slaves</li>
 					<li>Structuur van een bericht is XML (gebruik van ptree)</li>
 				</ul>
@@ -467,14 +497,11 @@
 					</ul>
 					<li class="fragment">Alle TCP-berichten worden gezipt</li>
 					<ul>
-						<li class="fragment">Zowel voor Distributed session als voor Parex</li>
+						<li class="fragment">Zowel voor gedistribueerde sessie als voor Parex</li>
 						<li class="fragment">Berichten (met SimState) tot meer dan 8 keer kleiner</li>
 						<li class="fragment">Minder bandbreedte wordt gebruikt</li>
 					</ul>
 				</ul>
-			</section>
-			<section>
-				<h2>Slave beheer en Master lookup</h2>
 			</section>
 			<section>
 				<h2>Slave beheer en Master lookup</h2>
@@ -523,29 +550,26 @@
 			</section>
 			<section>
 				<h2>Fouten tolerantie</h2>
-			</section>
-			<section>
-				<h2>Fouten tolerantie</h2>
 				<h3>Mogelijke problemen</h3>
 				<ul>
-					<li class="fragment">Slave crashed</li>
+					<li class="fragment">Slave crasht</li>
 					<li class="fragment">Verbinding met slave verbroken</li>
 					<li class="fragment">Te weinig slaves beschikbaar</li>
-					<li class="fragment">Master crashed</li>
+					<li class="fragment">Master crasht</li>
                 </ul>
 			</section>
 			<section>
 				<h2>Fouten tolerantie</h2>
-				<h3>Slave crashed of verbinding met slave verbroken</h3>
+				<h3>Slave crasht of verbinding met slave verbroken</h3>
 				<div>
-					<div style="float: left; width: 50%;">
+					<div style="float: left; width: 40%;">
 					<img src="img/FaultTolerance1.png">
 					</div>
-					<div style="float: left; width: 50%;">
+					<div style="float: left; width: 60%;">
 					<ul>
 						<li>DistSimControl beschikt over ReportSaver deze zal het laatste report bijhouden</li>
-						<li>DistSimControl beschikt ook over TransferInfo waarin staat welke slaves welke info moeten terug sturen</li>
-						<li>Als DistSimControl merkt dat slave gecrashed of niet berijkbaar is haalt hij andere uit SlavePool en initializeerd ALLE slaves opnieuw</li>
+						<li>DistSimControl beschikt over TransferInfo waarin staat welke slaves welke info moeten terug sturen</li>
+						<li>Als DistSimControl merkt dat slave gecrashed of niet bereikbaar is haalt hij andere uit SlavePool en initializeert ALLE slaves opnieuw</li>
 					</ul>
 					</div>
 				</div>			
@@ -554,27 +578,37 @@
 				<h2>Fouten tolerantie</h2>
 				<h3>Wat als er geen slaves beschikbaar zijn?</h3>
 				<div>
-					<div style="float: left; width: 50%;">
+					<div style="float: left; width: 40%;">
 					<img src="img/FaultTolerance2.png">
 					</div>
-					<div style="float: left; width: 50%;">
+					<div style="float: left; width: 60%;">
 					<ul>
-						<li>Zelfde princiepe als vorige probleem</li>
-						<li>DistSimControl wordt in Queue gezet en BrokenParts worden aangeduid</li>
-						<li>Vanaf er genoeg Slaves vrijzijn om de eerste simulation in de queue te laten verderdoen wordt DistSimControl uit queue gehaald</li>
-						<li>Alle Slaves worden terug geherinitialiseerd</li>
+						<li>Zelfde principe als vorige probleem</li>
+						<li>DistSimControl wordt in queue gezet en BrokenParts worden aangeduid</li>
+						<li>Genoeg Slaves beschikbaar</li>
+						<ul>
+							<li>DistSimControl uit de queue</li>
+							<li>Alle Slaves worden geherinitialiseerd</li>
+						</ul>
 					</ul>
 					</div>
 				</div>
 			</section>
 			<section>
 				<h2>Fouten tolerantie</h2>
-				<h3>Wat als master crashed</h3>
+				<h3>Wat als master crasht</h3>
 				<p class="fragment">Voorlopig nog geen oplossing voor</p>
 			</section>
-			<section>
-				<h2>Demo</h2>
-			</section>
+		</section>
+		<section>
+			<h2>Wat hebben we geleerd</h2>
+			<ol>
+				<li class="fragment">Documentatie</li>
+				<li class="fragment">Code conventions</li>
+				<li class="fragment">Templates</li>
+		</section>
+		<section>
+			<h2>Demo</h2>
 		</section>
         
 
